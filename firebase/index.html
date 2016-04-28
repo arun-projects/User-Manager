@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>User Manager</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+	<style>
+		.bold {
+			font-weight:bold;
+		}
+
+		.margin-top-20 {
+			margin-top:20px;
+		}
+
+		.small-container {
+			width:700px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+
+		.txt-right {
+			text-align:right;
+		}
+	</style>
+
+	<script   src="http://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+	<script src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
+
+	<script src="app.js"></script>
+</head>
+
+<body>
+
+<div id="main-view"></div>
+
+<script id="users-template" type="text/x-handlebars-template">
+	<div class="container">
+		<h1>User Manager</h1>
+
+		<div>
+			<a href="#" class="btn btn-primary" data-target="#add-user-modal" data-toggle="modal">Add User</a>
+		</div>
+	</div>
+
+	<div class="container margin-top-20">
+		<table class="table striped">
+			<thead>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Action</th>
+			</thead>
+
+			<tbody>
+				{{#each users}}
+					<tr>
+						<td>
+							{{firstname}}
+						</td>
+						<td>
+							{{lastname}}
+						</td>
+						<td>
+							{{username}}
+						</td>
+						<td>
+							{{email}}
+						</td>
+						<td>
+							<a href="#/edit/{{@key}}" class="btn btn-primary">Edit</a>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</script>
+
+<script id="edit-user-template" type="text/x-handlebars-template">
+	<div class="small-container">
+		<h1>User Manager</h1>
+
+		<div>
+			<a href="#/users" class="btn btn-primary">Back</a>
+		</div>
+	</div>
+
+	<div class="small-container margin-top-20">
+		<form id="edit-user-form">
+			<div class="well">
+				<div class="bold">
+					First Name
+				</div>
+				<div class="margin-top-20">
+					<input id="edit-firstname" type="text" class="form-control" value="{{firstname}}" />
+				</div>
+				<div class="bold margin-top-20">
+					Last Name
+				</div>
+				<div class="margin-top-20">
+					<input id="edit-lastname" type="text" class="form-control" value="{{lastname}}" />
+				</div>
+				<div class="bold margin-top-20">
+					Username
+				</div>
+				<div class="margin-top-20">
+					<input id="edit-username" type="text" class="form-control" value="{{username}}" />
+				</div>
+				<div class="bold margin-top-20">
+					Email
+				</div>
+				<div class="margin-top-20">
+					<input id="edit-email" type="text" class="form-control" value="{{email}}" />
+				</div>
+				<div class="margin-top-20 txt-right">
+					<a href="#/users" class="btn btn-default">Cancel</a>
+					<button type="submit" class="btn btn-primary">Edit User</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</script>
+
+<div id="add-user-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form id="user-form">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">Add a User</h4>
+				</div>
+				<div class="modal-body">
+					<div class="bold">
+						First Name
+					</div>
+					<div class="margin-top-20">
+						<input id="firstname" type="text" class="form-control" placeholder="First Name" />
+					</div>
+					<div class="bold margin-top-20">
+						Last Name
+					</div>
+					<div class="margin-top-20">
+						<input id="lastname" type="text" class="form-control" placeholder="Last Name" />
+					</div>
+					<div class="bold margin-top-20">
+						Username
+					</div>
+					<div class="margin-top-20">
+						<input id="username" type="text" class="form-control" placeholder="Username" />
+					</div>
+					<div class="bold margin-top-20">
+						Email
+					</div>
+					<div class="margin-top-20">
+						<input id="email" type="text" class="form-control" placeholder="Email" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save User</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
